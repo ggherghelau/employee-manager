@@ -164,7 +164,10 @@ app.use(express.static(path.join(__dirname, "../client"), {extensions: ["html", 
 
 })
 
- 
+// endpoint to display user list
+app.get('/api/v1/users', (req, res)=>{
+  res.sendFile("./data/users.json");
+})
 
 // Final Middleware 
 // Catch all for any request not handled while express was

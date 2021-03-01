@@ -1,19 +1,17 @@
-# Employee Manager Day 6
+# Employee Manager 
 
-### EJS TASKS
-- Setup EJS with Node and Express
-- Add the dashboard and the login to the views folder.
-- Add slots to the login template for the password and email warnings.
-- Send the template using res.render(template, {data})
-- Update the index.html page anchor elements to point to the login get route.
+### How to use the app
+- Download from GitHub
+- Open Terminal
+- Run "npm install" to install all the dependencies listed in package.json
+- To start application, run "npm start"
 
-### Login Service Returns User Object
-- If value isValidUser true redirect to dashboard.
-- Set cookie session variable to true.
+### What this application does
+- On the main page you are asked to either login or register as a new user
+- If you choose to register, after a successful registration, you are redirected to the login page
+- Login to see the content
 
-### Login Service Returns NULL
-- Render login template and add warnings messages.
-- Adding client side javascript to template.
+
 
 
  
