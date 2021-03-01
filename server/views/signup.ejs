@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <ul >
+        <li><a href="index.html">home</a></li>
+        <li><a href="login">account login</a></li>
+    </ul>
+</nav>
+
+      <aside class="app-form">
+        <header><h2 class="center">Sign Up For Your Free Trial Account</h2></header>
+          <form id="register" action="/signup" method="POST">
+       
+            <div class="form-control">
+                <label for="fullname">Please enter your full name.
+                  <span class="warning"><%- nameWarning %></span></label>
+                <input 
+                  id="fullname" 
+                  type="text" 
+                  name="fullname" 
+                  placeholder="firstName lastName" 
+                  value="<%- name %>"
+                  required/>
+            </div>
+              <div class="form-control">
+                  <label for="email">Enter a valid email address
+                    <span class="warning"><%- emailWarning %></span></label>
+                  <input 
+                    id="email" 
+                    type="text" 
+                    name="email" 
+                    placeholder="example@yourmail.com" 
+                    value="<%-email%>"
+                    required/>
+              </div>
+
+              <div class="form-control">
+                <label for="password">Enter a secure password
+                  <span class="warning"><%- passwordWarning %></span></label>
+                <input 
+                  id="password" 
+                  type="text" 
+                  name="password" 
+                  placeholder="min 5 characters" 
+                  value="<%- password %>"
+                  required/>
+            </div>
+
+            <div class="form-control">
+             <button type="submit">create account</button>
+            </div>
+          </form>
+      </aside>
+</body>
+</html>

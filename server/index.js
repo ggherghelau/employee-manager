@@ -7,10 +7,11 @@ const express = require('express');
 const path = require('path')
 const cors = require('cors')
 const cookSession = require('cookie-session')
+const { v4 : uuidv4 } = require('uuid');
 
 // Importing our Login Service Used With the POST Login Route
 const loginService = require('./services/loginService')
-
+const signupService = require('./services/signupService')
 
 
 // create an instance of express
@@ -20,7 +21,7 @@ const app = express()
 // when the index.js file starts up this file is read in and
 // we can set configuration variables for the application.
 // never upload to git...
-const PORT =  process.env.PORT || 5000 
+const PORT =  process.env.PORT || 3000 
 
  
 // Middleware For Cross Origin Resource SHaring
@@ -99,6 +100,39 @@ app.use(express.static(path.join(__dirname, "../client"), {extensions: ["html", 
             })
        }
   })
+
+  app.get('/signup', (req, res)=>{
+    // user template placed inside the views directory
+    // res.render(view, data)   ejs.render(template, {data})
+    res.render('signup', {nameWarning:"", passwordWarning:"", emailWarning:"", name:"", email:"", password:""})
+ 
+  })
+
+  app.post('/signup', (req, res) => {
+
+    const credentials = {
+      id:uuidv4(),
+      name:req.body.fullname,
+      email:req.body.email,
+      password:req.body.password
+    }
+
+    const validUser = signupService.validate(credentials);
+
+    if (validUser.valid){
+          signupService.saveUser(credentials);
+          res.redirect('login');
+        } else {
+          res.render('signup', {
+            nameWarning:validUser.nameError,
+            emailWarning:validUser.emailError,
+            passwordWarning:validUser.passwordError,
+            name:req.body.fullname,
+            email:req.body.email,
+            password:req.body.password
+          })
+        }
+  })
     
  
  app.post('/login', (req, res)=>{
@@ -115,6 +149,21 @@ app.use(express.static(path.join(__dirname, "../client"), {extensions: ["html", 
  
  })
 
+ app.post('/signup', (req, res)=>{
+  // POST name value pairs in body request
+  const credentials = {
+    id:uuidv4(),
+    name:req.body.fullname,
+    email:req.body.email,
+    password:req.body.password
+   };
+   
+  const validUser = signupService.validate(credentials);
+  
+   res.end();
+
+})
+
  
 
 // Final Middleware 
@@ -129,5 +178,5 @@ app.use((req, res) => {
 
 // Tell express app to listen for incomming request on a specific PORT
 app.listen(PORT, () => {
-  console.log(`server started on http://localhost:5000`);
+  console.log(`server started on http://localhost:3000`);
 });
